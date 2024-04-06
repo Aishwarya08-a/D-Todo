@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup</title>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+   <!-- Bootstrap Icons -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="form-container">
+        <h2 class="text-center mb-4">Create an Account</h2>
+
+        {% if Errormsg %}
+            <div class="alert alert-danger">
+              {{Errormsg}}
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+          <div class="form-group">
+            <label>Username</label>
+            <input type="email" class="form-control" name="uname" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" name="upass" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" class="form-control" name="cpass" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+
+          {% if Success %}
+          <div class="alert alert-success">
+            {{Success}}
+          </div>
+          {% endif %}
+
+        </form>
+        <div class="text-center mt-3">
+          <p>Already have an account? <a href="#">Login</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

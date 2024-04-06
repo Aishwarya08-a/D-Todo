@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <!-- Add your CSS file or styles here -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="form-container">
+          <h2 class="text-center mb-4">Get Things Done</h2>
+          <form method="POST" action="/add">
+            {% csrf_token %}
+            <div class="form-group">
+              <input type="text" class="form-control" name="utitle" placeholder="Add Task?">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" style="width: 100%; margin-top: 15px;">Add
+              Task</button>
+          </form>
+          <div class="task-container">
+            {% for todo in todos %}
+            <div class="todo {% if todo.completed %} completed {% endif %}">
+              <div class="task">
+                <h6 class="task-title">{{ todo.tid }}. {{ todo.title }}</h6>
+              </div>
+              <div class="icon">
+                <a href="delete/{{ todo.tid }}"><i class="bi bi-trash-fill"></i></a>
+                <a href="complete/{{ todo.tid }}">
+                  <i class="bi bi-check2-square {% if todo.completed %}text-white bg-success p-1{% endif %}"></i>
+                </a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
